@@ -22,7 +22,7 @@ const QuestionList = () => {
 
   const columnDefs = [
     { headerName: 'S.no', field: 'id', width: 80 },
-    { headerName: 'Category', field: 'category', width: 150 },
+    { headerName: 'Category', field: 'category', width: 200 },
     { headerName: 'Difficulty Level', field: 'difficultyLevel', width: 150 },
     {
       headerName: 'Question',
@@ -36,7 +36,7 @@ const QuestionList = () => {
 
   return (
     
-    <div className="ag-theme-alpine" style={{ height: '1000px', width: '1000px', margin: '0 auto' }}>
+    <div className="ag-theme-alpine" style={{ height: '550px', width: '1000px', margin: '0 auto' }}>
     <h1>Questions List</h1>
       <AgGridReact
         columnDefs={columnDefs}
