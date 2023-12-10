@@ -3,6 +3,9 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import axios from 'axios';
+import './QuestionList.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const QuestionList = () => {
   const [questions, setQuestions] = useState([]);
@@ -20,6 +23,44 @@ const QuestionList = () => {
     fetchQuestions();
   }, []);
 
+  const handleDelete = async (rowId) => {
+    try {
+      await axios.delete(`http://localhost:8080/question/delete/${rowId}`);
+      toast.success('Question deleted successfully!', {
+        position: 'top-right',
+        autoClose: 3000, // 3 seconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+
+      const updatedQuestions = questions.filter((question) => question.id !== rowId);
+      setQuestions(updatedQuestions);
+    } catch (error) {
+      console.error('Error deleting question:', error);
+
+      if (error.response && error.response.status === 500) {
+        toast.error('Internal server error. Please try again later.', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      } else {
+        toast.error('Error deleting question. Please try again later.', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
+    }
+  };
   const columnDefs = [
     { headerName: 'S.no', field: 'id', width: 80 },
     { headerName: 'Category', field: 'category', width: 200 },
@@ -31,18 +72,23 @@ const QuestionList = () => {
       cellStyle: { whiteSpace: 'normal' }, // Enable text wrapping
       autoHeight: true, // Auto-adjust row height based on content
     },
+    {
+      headerName: 'Actions',
+      width: 120,
+      cellRenderer: (params) => (
+        <button className='button-question-list' onClick={() => handleDelete(params.data.id)}>Delete</button>
+      ),
+    },
   ];
-  
 
   return (
-    
     <div className="ag-theme-alpine" style={{ height: '550px', width: '1000px', margin: '0 auto' }}>
-    <h1>Questions List</h1>
+      <h1 className='h1-question-list'>Questions List</h1>
       <AgGridReact
         columnDefs={columnDefs}
         rowData={questions}
         pagination={true}
-        paginationPageSize={10}
+        paginationPageSize={20}
       />
     </div>
   );
