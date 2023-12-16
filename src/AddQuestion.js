@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './AddQuestion.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const AddQuestion = () => {
   const [formData, setFormData] = useState({
@@ -20,14 +23,51 @@ const AddQuestion = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    for (const key in formData) {
+      if (formData[key].trim() === '') {
+        toast.warning('Please fill in all fields before submitting!', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        return; // Exit early if any field is empty
+      }
+    }
     try {
       const response = await axios.post('http://localhost:8080/question/add', formData);
       console.log('Question added successfully:', response.data);
-      alert("Question Added Successfully");
+      toast.success('Question added successfully!', {
+        position: 'top-right',
+        autoClose: 3000, // 3 seconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+       // Reset the form after successful submission
+      setFormData({
+        category: '',
+        difficultyLevel: '',
+        option1: '',
+        option2: '',
+        option3: '',
+        option4: '',
+        question: '',
+        correctAnswer: '',
+      });
     } catch (error) {
       console.error('Error adding question:', error);
-      alert("Error adding question");
+      toast.error('Some Error Occured unable to add question!', {
+        position: 'top-right',
+        autoClose: 3000, // 3 seconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
   };
 

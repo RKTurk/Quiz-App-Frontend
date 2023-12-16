@@ -6,6 +6,8 @@ import axios from 'axios';
 import './QuestionList.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { CategoryFilter, DifficultyFilter } from 'ag-grid-react';
+
 
 const QuestionList = () => {
   const [questions, setQuestions] = useState([]);
@@ -63,8 +65,8 @@ const QuestionList = () => {
   };
   const columnDefs = [
     { headerName: 'S.no', field: 'id', width: 80 },
-    { headerName: 'Category', field: 'category', width: 200 },
-    { headerName: 'Difficulty Level', field: 'difficultyLevel', width: 150 },
+    { headerName: 'Category', field: 'category', width: 200, filter: 'CategoryFilter' },
+    { headerName: 'Difficulty Level', field: 'difficultyLevel', width: 150, filter: 'DifficultyFilter' },
     {
       headerName: 'Question',
       field: 'question',
@@ -89,6 +91,10 @@ const QuestionList = () => {
         rowData={questions}
         pagination={true}
         paginationPageSize={20}
+        frameworkComponents={{
+          CategoryFilter: CategoryFilter,
+          DifficultyFilter: DifficultyFilter,
+        }}
       />
     </div>
   );
