@@ -5,6 +5,7 @@ import QuestionList from './QuestionList';
 import AddQuestion from './AddQuestion';
 import CreateQuiz from './CreateQuiz';
 import QuizList from './QuizList';
+import QuizScore from './QuizScore';
 import Home from './Home';
 import Layout from './Layout'; // Adjust the path as needed
 import NavBar from './NavBar'; // Import the NavBar component
@@ -23,6 +24,7 @@ const AppRouter = () => {
           <Route path="/addquestion" element={<AddQuestion />} />
           <Route path="/createquiz" element={<CreateQuiz />} />
           <Route path="/quizlist" element={<QuizList />} />
+          <Route path="/quizscore" element={<QuizScore />} />
         </Routes>
       </Layout>
     </Router>

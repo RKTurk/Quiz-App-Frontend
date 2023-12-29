@@ -22,6 +22,9 @@ const NavBar = () => {
         <li>
           <Link to="/createquiz">Create Quiz</Link>
         </li>
+        <li>
+          <Link to="/quizscore">View Quiz Score</Link>
+        </li>
       </ul>
     </nav>
   );
