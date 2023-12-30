@@ -11,6 +11,7 @@ import Layout from './Layout'; // Adjust the path as needed
 import NavBar from './NavBar'; // Import the NavBar component
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import QuizChart from './HighCharts/QuizChart';
 
 const AppRouter = () => {
   return (
@@ -25,6 +26,8 @@ const AppRouter = () => {
           <Route path="/createquiz" element={<CreateQuiz />} />
           <Route path="/quizlist" element={<QuizList />} />
           <Route path="/quizscore" element={<QuizScore />} />
+          <Route path="/dashboard" element={<QuizChart />} />
+
         </Routes>
       </Layout>
     </Router>
