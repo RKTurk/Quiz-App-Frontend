@@ -9,6 +9,7 @@ import QuizScore from './QuizScore';
 import Home from './Home';
 import Layout from './Layout'; // Adjust the path as needed
 import NavBar from './NavBar'; // Import the NavBar component
+import Login from './Login';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import QuizChart from './HighCharts/QuizChart';
@@ -20,7 +21,8 @@ const AppRouter = () => {
         <ToastContainer />
         <NavBar /> {/* Include the NavBar component */}
         <Routes> {/* Use 'Routes' instead of 'Switch' */}
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Login />} />
           <Route path="/questionlist" element={<QuestionList />} /> 
           <Route path="/addquestion" element={<AddQuestion />} />
           <Route path="/createquiz" element={<CreateQuiz />} />
