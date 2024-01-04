@@ -5,7 +5,7 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 import axios from 'axios';
 import './QuestionList.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { ScoreFilter, NameFilter } from 'ag-grid-react';
+import { ScoreFilter, NameFilter, TotalScoreFilter } from 'ag-grid-react';
 
 
 const QuizScore = () => {
@@ -29,6 +29,8 @@ const QuizScore = () => {
     { headerName: 'S.no', field: 'id', width: 80 },
     { headerName: 'Name', field: 'name', width: 200, filter: 'NameFilter' },
     { headerName: 'Score', field: 'score', width: 150, filter: 'ScoreFilter' },
+    { headerName: 'Total Score', field: 'total_score', width: 150, filter: 'TotalScoreFilter' },
+
     {
       headerName: 'Attempted On',
       field: 'attemptedOn',
@@ -51,6 +53,7 @@ const QuizScore = () => {
         frameworkComponents={{
           ScoreFilter: ScoreFilter,
           NameFilter: NameFilter,
+          TotalScoreFilter: TotalScoreFilter
         }}
       />
     </div>

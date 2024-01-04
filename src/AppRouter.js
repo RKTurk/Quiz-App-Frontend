@@ -35,7 +35,7 @@ const AppRouter = () => {
           <Route path="/questionlist" element={<QuestionList />} /> 
           <Route path="/addquestion" element={<AddQuestion />} />
           <Route path="/createquiz" element={<CreateQuiz />} />
-          <Route path="/quizlist" element={<QuizList />} />
+          <Route path="/quizlist" element={<QuizList loggedInUser={loggedInUser}  />} />
           <Route path="/quizscore" element={<QuizScore />} />
           <Route path="/dashboard" element={<QuizChart />} />
 

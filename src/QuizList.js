@@ -8,7 +8,7 @@ import './QuizList.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const QuizList = () => {
+const QuizList = ({ loggedInUser }) => {
   const [quiz, setQuiz] = useState([]);
   const [questionsData, setQuestionsData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -79,8 +79,8 @@ const QuizList = () => {
   };
 
   const handleSubmit = async () => {
-    const apiUrl = `http://localhost:8080/quiz/submit/${rowID}`;
-     // Check if all questions have responses
+    const apiUrl = `http://localhost:8080/quiz/submit/${rowID}?username=${loggedInUser.username}`;
+    // Check if all questions have responses
      const hasEmptyResponse = questionsData.some((question) => !selectedResponses[question.id]);
 
      if (hasEmptyResponse) {
