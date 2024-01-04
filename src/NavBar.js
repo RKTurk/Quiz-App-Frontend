@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css'; 
 
-const NavBar = () => {
+const NavBar = ({ loggedInUser }) => {
   return (
     <nav>
       <ul>
@@ -31,6 +31,11 @@ const NavBar = () => {
         <li>
           <Link to="/dashboard">Dashboard</Link>
         </li>
+        {loggedInUser && (
+          <li>
+            <span className="username">Welcome, {loggedInUser.username}!</span>
+          </li>
+        )}
       </ul>
     </nav>
   );

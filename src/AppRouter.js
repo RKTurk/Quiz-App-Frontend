@@ -1,5 +1,5 @@
 // AppRouter.js
-import React from 'react';
+import React, { useState }  from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import 'Routes' instead of 'Switch'
 import QuestionList from './QuestionList';
 import AddQuestion from './AddQuestion';
@@ -15,15 +15,22 @@ import 'react-toastify/dist/ReactToastify.css';
 import QuizChart from './HighCharts/QuizChart';
 import Register from './Register';
 
+
 const AppRouter = () => {
+  const [loggedInUser, setLoggedInUser] = useState(null);
+
+  const handleLogin = (user) => {
+    setLoggedInUser(user);
+  };
+
   return (
     <Router>
      <Layout>
         <ToastContainer />
-        <NavBar /> {/* Include the NavBar component */}
+        <NavBar loggedInUser={loggedInUser} /> {/* Include the NavBar component */}
         <Routes> {/* Use 'Routes' instead of 'Switch' */}
           <Route path="/home" element={<Home />} />
-          <Route path="/" element={<Login />} />
+          <Route path="/"  element={<Login onLogin={handleLogin} />}/>
           <Route path="/register" element={<Register />} />
           <Route path="/questionlist" element={<QuestionList />} /> 
           <Route path="/addquestion" element={<AddQuestion />} />

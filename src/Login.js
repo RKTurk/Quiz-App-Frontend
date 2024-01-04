@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -45,6 +45,7 @@ const Login = () => {
         pauseOnHover: true,
         draggable: true,
       });
+      onLogin({ username }); // Call onLogin with user data
       navigate('/dashboard'); 
     } else { 
       toast.error('Invalid Credentials!', {
